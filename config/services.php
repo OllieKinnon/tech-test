@@ -35,4 +35,8 @@ return [
         ],
     ],
 
+    'customer_api' => [
+        'url' => env('CUSTOMER_API_URL'),
+        'token' => env('CUSTOMER_API_TOKEN'),
+    ],
 ];
