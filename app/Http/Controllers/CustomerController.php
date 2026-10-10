@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Http;
 
 class CustomerController extends Controller
 {
@@ -30,6 +31,28 @@ class CustomerController extends Controller
             ->withInput();
     }
 
-        return 'Form submitted successfully!';
+        $validated = $validator->validated();
+
+try {
+    $response = Http::withToken(config('services.customer_api.token'))
+        ->acceptJson()
+        ->post(config('services.customer_api.url'), $validated);
+} catch (\Illuminate\Http\Client\ConnectionException $e) {
+    return redirect()
+        ->route('customers.create')
+        ->withErrors(['api' => 'Sorry, we could not connect to the service. Please try again.'])
+        ->withInput();
+}
+
+if ($response->failed()) {
+    return redirect()
+        ->route('customers.create')
+        ->withErrors(['api' => 'Sorry, we could not submit your details. Please try again.'])
+        ->withInput();
+    }
+
+    return view('customers.success', [
+    'customer' => $validated,
+    ]);
     }
 }
