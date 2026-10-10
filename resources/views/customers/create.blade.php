@@ -25,32 +25,32 @@
         @csrf
         <div>
             <label for="first_name">First Name</label>
-            <input type="text" id="first_name" name="first_name" required>
+            <input type="text" id="first_name" name="first_name" value="{{ old('first_name') }}" required>
         </div>
 
         <div>
             <label for="last_name">Last Name</label>
-            <input type="text" id="last_name" name="last_name" required>
+            <input type="text" id="last_name" name="last_name" value="{{ old('last_name') }}" required>
         </div>
 
         <div>
             <label for="email">Email Address</label>
-            <input type="email" id="email" name="email" required>
+            <input type="email" id="email" name="email" value="{{ old('email') }}" required>
         </div>
 
         <div>
             <label for="phone">Phone Number</label>
-            <input type="tel" id="phone" name="phone" required>
+            <input type="tel" id="phone" name="phone" value="{{ old('phone') }}" required>
         </div>
 
         <div>
             <label for="date_of_birth">Date of Birth</label>
-            <input type="date" id="date_of_birth" name="date_of_birth" required>
+            <input type="date" id="date_of_birth" name="date_of_birth" value="{{ old('date_of_birth') }}" required>
         </div>
 
         <div>
             <label>
-                <input type="checkbox" name="marketing_consent" value="yes">
+                <input type="checkbox" name="marketing_consent" value="yes" @checked(old('marketing_consent') === 'yes')>
                 I consent to receive marketing communications (optional)
             </label>
         </div>
