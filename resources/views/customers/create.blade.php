@@ -12,7 +12,13 @@
 
     @if ($errors->any())
         <div>
-            <p>Please correct the following errors:</p>
+            <p>
+                @if ($errors->has('api'))
+                    There was a problem submitting your details:
+                @else
+                Please correct the following errors:
+                @endif
+            </p>
             <ul>
                 @foreach ($errors->all() as $error)
                     <li>{{ $error  }}</li>
