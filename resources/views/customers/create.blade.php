@@ -10,7 +10,8 @@
 
     <p>Please enter your details below.</p>
 
-    <form action="#" method="POST">
+    <form action="{{ route('customers.store') }}" method="POST">
+        @csrf
         <div>
             <label for="first_name">First Name</label>
             <input type="text" id="first_name" name="first_name" required>

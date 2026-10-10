@@ -13,6 +13,6 @@ class CustomerController extends Controller
 
     public function store(Request $request)
     {
-        //
+        return 'Form submitted successfully!';
     }
 }
