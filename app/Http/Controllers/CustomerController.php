@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class CustomerController extends Controller
 {
@@ -13,6 +14,22 @@ class CustomerController extends Controller
 
     public function store(Request $request)
     {
+        $validator = Validator::make($request->all(), [
+        'first_name' => 'required|string|max:25',
+        'last_name' => 'required|string|max:25',
+        'email' => 'required|email|max:50',
+        'phone' => 'required|string|max:15',
+        'date_of_birth' => 'required|date|before:today',
+        'marketing_consent' => 'sometimes|accepted',
+    ]);
+
+    if ($validator->fails()) {
+        return redirect()
+            ->route('customers.create')
+            ->withErrors($validator)
+            ->withInput();
+    }
+
         return 'Form submitted successfully!';
     }
 }
